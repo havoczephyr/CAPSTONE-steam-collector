@@ -6,13 +6,13 @@
 }
 
 body {
-    background-color:rgb(143, 124, 175)
+    background-color:rgb(49, 46, 82);
 }
 
 header {
     background-color: rgb(73, 59, 98);
     color:rgb(255, 254, 254);
-    text-align: center
+    text-align: center;
 }
 
 
@@ -20,6 +20,8 @@ form {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
+    color:white;
     height: 150px;
     width: 200px;
     margin-top: 20px;
