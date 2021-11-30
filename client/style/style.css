@@ -5,9 +5,14 @@
     
 }
 
+body {
+    background-color:rgb(143, 124, 175)
+}
+
 header {
     background-color: rgb(73, 59, 98);
     color:rgb(255, 254, 254);
+    text-align: center
 }
 
 
