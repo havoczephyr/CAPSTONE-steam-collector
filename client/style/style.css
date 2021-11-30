@@ -1,0 +1,32 @@
+* {
+    font-family: Helvetica;
+    margin: 0;
+    padding: 0;
+    
+}
+
+header {
+    background-color: rgb(73, 59, 98);
+    color:rgb(255, 254, 254);
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px;
+    width: 200px;
+    margin-top: 20px;
+}
+
+#music-table {
+    background-color:antiquewhite;
+    border: 1px solid black;
+    padding: 5px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    width: 1100px;
+}
+
