@@ -1,14 +1,18 @@
 const steamGameSelector = document.getElementById('steam-game-select')
 const steamTableContainer = document.querySelector('#steam-data-container')
+
+//These empty vars are used to collect cache data from the DB for use in the system.
 let cachedSteamTable
 let cachedIgnoredTable
 let cachedUrl
-//Axios endpoints to load cache to memory
-//endpoints are loaded seperately to be referenced individually.
 
+
+//function used to force HTML to refresh page
 const refreshThoseWindows = () => {
     window.location=window.location
 }
+
+//Axios Endpoints to generate data for cache
 const getTableData = () => {
     return axios.get('/api/steam-data')
     .then(res => {
@@ -31,6 +35,7 @@ const getURLData = () => {
     })
 }
 
+//adds music url to DB
 const pairWithRayConEarBuds = () => {
     let steam_id = document.getElementById('steam-game-select').value
     let music_url = document.getElementById('music-url-input').value
@@ -38,13 +43,14 @@ const pairWithRayConEarBuds = () => {
     .then(refreshThoseWindows)
     .catch((err) => console.log(err))
 }
-
+//adds game to ignored table.
 const unpairWithRaidShadowLegends = () => {
     let steam_id = document.getElementById('steam-game-select').value
     axios.post('/api/update-ignored', {steam_id})
     .then(refreshThoseWindows)
     .catch((err) => console.log(err))
 }
+
 //---activate endpoints--
 Promise.all([
     getTableData(),
@@ -67,7 +73,7 @@ Promise.all([
     })
 
 
-
+//populates game drop down menu with games that are not in ignored table or music url table.
 const makeSteamDataOptions = (table) => {
     table.forEach((item, index) => {
         const hasIgnoreEntry = cachedIgnoredTable.find(({ steam_id }) => steam_id === item.steam_id) != null
@@ -83,8 +89,9 @@ const makeSteamDataOptions = (table) => {
 }
 
     const tableFromJson = () => {
-        //credit for this function goes to: https://www.encodedna.com/javascript/practice-ground/default.htm?pg=convert_json_to_table_javascript
-        // the json data. (you can change the values for output.)
+        // while greatly modified for the purposes of this project,
+        // credit for the initial function template goes to: 
+        // https://www.encodedna.com/javascript/practice-ground/default.htm?pg=convert_json_to_table_javascript
 
         // Extract value from table header. 
         const col = ['title', 'music_url'];
@@ -129,8 +136,7 @@ const makeSteamDataOptions = (table) => {
         divShowData.appendChild(table);
     }
 
-//an initial load of endpoints are performed on site startup.
-
+//purposefully made a function instead of fat-arrow to insure functionality at page startup.
 function deleteUrlClick(music_url_id){
     axios.delete(`/api/delete-music/${music_url_id}`)
     .then(refreshThoseWindows)
